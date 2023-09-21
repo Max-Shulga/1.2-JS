@@ -1,0 +1,132 @@
+@import "reset.css";
+
+.task {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+/*Task 1*/
+#black_square, .black_square {
+    width: 100px;
+    height: 100px;
+    background: #000;
+    margin: 0 auto;
+}
+
+.buttons {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/*Task 3*/
+.black_squares {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: baseline;
+    justify-content: space-around;
+}
+
+/*Task 4*/
+
+.task-4-input-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/*Task 5*/
+
+.yellow-square {
+    margin: 30px auto;
+    width: 100px;
+    height: 100px;
+    background: #e4f706;
+    cursor: pointer;
+}
+
+/*Task 6*/
+#task-6-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    max-width: 100px;
+    margin: 0 auto;
+    height: 110px; /* Высота #red-square + высота #task-6-button + отступ */
+}
+
+#red-square {
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    background: #e81b1b;
+    opacity: 0;
+}
+
+#task-6-button {
+    height: 50px;
+    margin-top: 10px;
+}
+
+/*Task 7*/
+#green-square {
+    width: 50px;
+    height: 20px;
+    background: #2fb338;
+    display: none;
+}
+
+#task-7-input {
+    width: 150px;
+}
+
+/*Task 8*/
+
+.task-8-content-container {
+    display: flex;
+    gap: 15px;
+}
+
+#task-8-link-image {
+    max-width: 300px;
+}
+
+/*Task 9*/
+
+#task-9-content-container {
+    display: flex;
+    gap: 15px;
+}
+
+#task-9-images-container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.task-9-image {
+    width: 300px;
+}
+
+/*Task 10*/
