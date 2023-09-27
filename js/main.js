@@ -124,7 +124,7 @@ addButton.addEventListener('click', () => {
     }
     document.getElementById('task-9-textarea').value = '';
 })
-const clearButton = document.getElementById('task-9-button-removeAll')
+const clearButton = document.getElementById('task-9-button-removeAll');
 
 clearButton.addEventListener('click', () => {
     const childElements = document.querySelectorAll(".task-9-image");
@@ -134,4 +134,166 @@ clearButton.addEventListener('click', () => {
     }
 })
 
-//Task 10
+//Task 10-11
+const coordinate = document.getElementById('coordinate-block-text');
+
+document.addEventListener('mousemove', (event) => {
+
+    const userCoordinates = document.getElementById('userCoordinates');
+
+    /*is it needed?*/
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+    }
+
+    function success(pos) {
+        const crd = pos.coords;
+        userCoordinates.innerText = `\n Latitude : ${crd.latitude}\n Longitude: ${crd.longitude}`;
+    }
+
+    function error(err) {
+        userCoordinates.innerText = `\n ERROR(${err.code}): ${err.message}`;
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    const userLanguage = navigator.language
+
+    coordinate.innerText = `X: ${mouseX}, Y: ${mouseY} \n Browser language: ${userLanguage}`;
+})
+
+//Task 13
+
+if (window.localStorage) {
+    const inputLocalStorage = document.getElementById("input-localStorage")
+    const myStorage = window.localStorage
+    const uniqueKey = 'myCustomKey';
+    inputLocalStorage.value = myStorage.getItem(uniqueKey)
+
+    inputLocalStorage.addEventListener("blur", () => {
+        myStorage.setItem(uniqueKey, inputLocalStorage.value);
+    })
+}
+
+const inputCookie = document.getElementById("input-cookies");
+
+function setCookies(key, value) {
+    const data = new Date();
+    data.setTime(data.getTime() + 60 * 1000);
+    const expires = 'expires=' + data.toUTCString();
+    document.cookie = key + '=' + value + ';' + expires + ';path=/';
+}
+
+function getCookies(key) {
+    const name = key + "=";
+    const decodedCookies = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookies.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i];
+        while (cookie.charAt(0) === ' ') {
+            cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length)
+        }
+    }
+    return '';
+}
+
+inputCookie.value = getCookies('text');
+inputCookie.addEventListener('blur', () => {
+    setCookies('text', inputCookie.value);
+})
+
+const inputSessionStorage = document.getElementById('input-sessionStorage');
+const sessionStorageKey = 'text2';
+
+inputSessionStorage.value = sessionStorage.getItem(sessionStorageKey);
+
+inputSessionStorage.addEventListener('blur', () => {
+    sessionStorage.removeItem(sessionStorageKey);
+    sessionStorage.setItem(sessionStorageKey, inputSessionStorage.value);
+})
+
+//Task 14
+
+const scrollToTopButton = document.getElementById('scrollToTopButton');
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+}
+
+window.addEventListener('scroll', () => {
+    if (document.documentElement.scrollTop > 200) {
+        scrollToTopButton.style.display = 'block';
+    } else {
+        scrollToTopButton.style.display = 'none';
+    }
+})
+
+scrollToTopButton.addEventListener('click', scrollToTop);
+
+//Task 15
+
+const blockOut = document.getElementById('block-out')
+const blockIn = document.getElementById('block-in')
+
+document.addEventListener('click', e => {
+    if (e.target === blockIn) {
+        alert('block-in clicked')
+    } else if (e.target === blockOut) {
+        alert('block-out clicked')
+    }
+})
+
+//Task 16
+
+const task16Button = document.getElementById('task-16-button')
+const graySquare = document.getElementById('gray-square')
+task16Button.addEventListener('click', () => {
+    graySquare.style.display = 'block';
+    document.body.style.overflow = "hidden";
+
+})
+graySquare.addEventListener('click', () => {
+    graySquare.style.display = 'none';
+    document.body.style.overflow = "auto";
+})
+
+//Task 17
+
+const form = document.getElementById("myForm");
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+})
+//Task 18
+document.addEventListener("DOMContentLoaded", function () {
+    const dropArea = document.getElementById("drop-area");
+    const inputFile = document.getElementById("input-file");
+    const imgView = document.getElementById("img-view");
+
+    inputFile.addEventListener("change", uploadImage);
+
+    function uploadImage() {
+        let imgLink = URL.createObjectURL(inputFile.files[0])
+        imgView.style.backgroundImage = `url(${imgLink})`;
+        imgView.textContent = '';
+        imgView.style.border = 0;
+    }
+
+    dropArea.addEventListener('dragover',(e)=>{
+        e.preventDefault();
+    });
+    dropArea.addEventListener('drop',(e)=>{
+        e.preventDefault();
+        inputFile.files = e.dataTransfer.files
+        uploadImage()
+    });
+})
